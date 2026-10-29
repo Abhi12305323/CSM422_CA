@@ -1,0 +1,39 @@
+# Exact architecture family recorded for the retained Wind U checkpoint.
+schema_version: 1
+
+experiment:
+  name: wind_u_v1_legacy_checkpoint
+  output_dir: ../outputs/legacy_wind_u
+
+data:
+  path: ../data/local/WindU1940-2022-DailyAvg.npy
+  validation_fraction: 0.1
+  split_strategy: chronological
+  seed: 42
+  scale: true
+
+model:
+  variant: regularized_legacy
+  filters: [64, 64, 64, 64]
+  kernel_sizes: [5, 3, 3, 1]
+  dropout: 0.2
+  l2: 0.01
+  batch_norm: true
+  output_channels: 1
+  output_activation: sigmoid
+  weights: ../artifacts/legacy/checkpoints/wind_u/cp.ckpt
+
+training:
+  batch_size: 24
+  epochs: 20
+  learning_rate: 0.001
+  loss: mse
+  early_stopping_patience: 5
+  reduce_lr_patience: 3
+  minimum_learning_rate: 0.000001
+  seed: 42
+
+evaluation:
+  context_steps: 5
+  horizon: 5
+  test_path: ../data/local/WindU2023Test.npy

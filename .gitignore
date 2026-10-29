@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.coverage
+.coverage.*
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
+build/
+dist/
+
+# Environments
+.env
+.venv/
+venv/
+.tools/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.github
+.DS_Store
+Thumbs.db
+.tmp
+
+# Local archives retained during the v1 cleanup
+.legacy_archive/
+
+# Large or generated datasets
+data/raw/
+data/interim/
+data/processed/
+data/local/
+*.npy
+*.npz
+*.nc
+*.grib
+*.grib2
+*.zip
+!data/sample/precipitation_2022.npy
+!data/sample/precipitation_2022_resized.npy
+artifacts/*
+!artifacts/legacy/
+!artifacts/legacy/**
+
+# Runtime outputs
+outputs/
+runs/
+/checkpoints/
+checkpoint
+*.ckpt*
+*.h5
+*.keras
+*.log
+!artifacts/legacy/checkpoints/precipitation.legacy.h5
+!artifacts/legacy/checkpoints/temperature.legacy.h5
+!artifacts/legacy/checkpoints/wind_u/checkpoint
+!artifacts/legacy/checkpoints/wind_u/cp.ckpt.data-00000-of-00001
+!artifacts/legacy/checkpoints/wind_u/cp.ckpt.index
+!artifacts/legacy/checkpoints/wind_v/checkpoint
+!artifacts/legacy/checkpoints/wind_v/cp.ckpt.data-00000-of-00001
+!artifacts/legacy/checkpoints/wind_v/cp.ckpt.index
+
+# Generated media
+*.gif
+*.mp4

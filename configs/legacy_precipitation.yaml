@@ -1,0 +1,40 @@
+# Historical checkpoint compatibility only. The legacy temporal output
+# convolution is non-causal and must not be presented as a corrected benchmark.
+schema_version: 1
+
+experiment:
+  name: precipitation_v1_legacy_checkpoint
+  output_dir: ../outputs/legacy_precipitation
+
+data:
+  path: ../data/local/ResizedShuffled.npy
+  validation_fraction: 0.1
+  split_strategy: chronological
+  seed: 42
+  scale: true
+
+model:
+  variant: legacy
+  filters: [64, 64]
+  kernel_sizes: [5, 1]
+  dropout: 0.0
+  l2: 0.0
+  batch_norm: true
+  output_channels: 1
+  output_activation: sigmoid
+  weights: ../artifacts/legacy/checkpoints/precipitation.legacy.h5
+
+training:
+  batch_size: 16
+  epochs: 9
+  learning_rate: 0.001
+  loss: mse
+  early_stopping_patience: 0
+  reduce_lr_patience: 0
+  minimum_learning_rate: 0.000001
+  seed: 42
+
+evaluation:
+  context_steps: 12
+  horizon: 12
+  test_path: ../data/sample/precipitation_2022_resized.npy

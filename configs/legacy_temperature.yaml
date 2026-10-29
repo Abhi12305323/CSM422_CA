@@ -1,0 +1,40 @@
+# Historical checkpoint compatibility only. Supply the non-versioned source
+# array locally; metrics remain grayscale-pixel metrics.
+schema_version: 1
+
+experiment:
+  name: temperature_v1_legacy_checkpoint
+  output_dir: ../outputs/legacy_temperature
+
+data:
+  path: ../data/local/ResizedTemperature.npy
+  validation_fraction: 0.1
+  split_strategy: chronological
+  seed: 42
+  scale: true
+
+model:
+  variant: legacy
+  filters: [64, 32, 32]
+  kernel_sizes: [5, 3, 1]
+  dropout: 0.0
+  l2: 0.0
+  batch_norm: true
+  output_channels: 1
+  output_activation: sigmoid
+  weights: ../artifacts/legacy/checkpoints/temperature.legacy.h5
+
+training:
+  batch_size: 8
+  epochs: 25
+  learning_rate: 0.001
+  loss: mse
+  early_stopping_patience: 5
+  reduce_lr_patience: 3
+  minimum_learning_rate: 0.000001
+  seed: 42
+
+evaluation:
+  context_steps: 12
+  horizon: 12
+  test_path: ../data/local/ResizedTemperature2022.npy
